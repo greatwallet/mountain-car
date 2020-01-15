@@ -17,8 +17,11 @@ max_episodes = 100000
 # epsilon for action choice
 epsilon = 0.05
 
-# environment: 'MountainCar-v0' or 'MountainCarContinuous-v0'
-env_name = 'MountainCar-v0' 
+# only support environment: 'MountainCar-v0' 
+env_name = 'MountainCar-v0'
+
+# if continous, please specify the n_actions
+n_actions = 200
 
 # pickle_path
 pickle_path = 'pickles'
@@ -32,17 +35,14 @@ max_state_val = 40
 # random seed
 seed = 42
 
-# action space length
-action_space_length = 3 if 'MountainCar-v0' else 1
-
 # init mode: "zeros" or "random"
-init_mode = "zeros"
+init_mode = "random"
 
 # learning mode "Q-learning", "SARSA" or "Expected-SARSA"
-learning_mode = "Q-learning"
+learning_mode = "Expected-SARSA"
 
 if __name__ == "__main__":
-    TD_learning(
+    _, score_list = TD_learning(
         env_name=env_name,
         alpha=alpha, 
         gamma=gamma, 
@@ -50,10 +50,10 @@ if __name__ == "__main__":
         max_episodes=max_episodes, 
         min_state_val=min_state_val, 
         max_state_val=max_state_val, 
-        action_space_length=3, 
         seed=seed, 
         pickle_path=pickle_path, 
         init_mode=init_mode, 
-        learning_mode=learning_mode
+        learning_mode=learning_mode, 
+        n_actions = n_actions
     )
     
